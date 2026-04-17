@@ -399,7 +399,7 @@ const sshClient = {
 
 
 
-const SUPABASE_URL = 'https://psnrofnlgpqkfprjrbnm.supabase.co';
+const SUPABASE_URL = 'https://bcuxmvaicdnkbxcvqbds.supabase.co';
 
 const ICON_URL = 'https://xnlmfbnwyqxownvhsqoz.supabase.co/storage/v1/object/public/files/cropped_circle_image.png';
 
@@ -549,7 +549,7 @@ if (process.platform === 'win32' && process.defaultApp) {
 
 }
 
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBzbnJvZm5sZ3Bxa2ZwcmpyYm5tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgwNDYyMzksImV4cCI6MjA4MzYyMjIzOX0.oYlLKiEI7cO03H4IGyMV0r2HqJYo30tadfnl-XZZZMI';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjdXhtdmFpY2Rua2J4Y3ZxYmRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0MjI5NDYsImV4cCI6MjA5MTk5ODk0Nn0.Z-iji5rFv-NOFi2Vj6WDs0Qh_Phbpk3yY6TLL--xEP8';
 
 
 
