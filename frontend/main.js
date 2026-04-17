@@ -181,6 +181,7 @@ function getDesktopBackendBaseUrl() {
 
 
     // Fallbacks (remove or override via AlphaOps_BACKEND_URL env)
+
     return 'https://alphaops-production.up.railway.app';
 }
 
@@ -1196,6 +1197,22 @@ app.on('window-all-closed', function () {
 
 ipcMain.handle('auth:set-token', async (event, token) => {
     console.log('[main] Updating access token. Length:', token ? token.length : 0);
+    try {
+        const raw = String(token || '');
+        const parts = raw.split('.');
+        if (parts.length === 3 && parts[1]) {
+            const padded = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+            const json = Buffer.from(padded, 'base64').toString('utf8');
+            const payload = JSON.parse(json);
+            const issuer = String(payload?.iss || '');
+            const refMatch = issuer.match(/https:\/\/([a-z0-9-]+)\.supabase\.co/i);
+            const ref = refMatch ? refMatch[1] : '';
+            console.log('[main] Access token issuer:', issuer);
+            if (ref) console.log('[main] Access token Supabase ref:', ref);
+        }
+    } catch (e) {
+        console.log('[main] Token decode warning (non-fatal):', e?.message || e);
+    }
     currentAccessToken = token || null;
     apiClient.setToken(currentAccessToken);
     return { success: true };

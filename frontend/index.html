@@ -105,7 +105,7 @@
         }
 
         /* AlphaAI Sidebar styles */
-        #alphaai-inline-panel {
+        #AlphaAI-inline-panel {
             background-color: transparent !important;
             border-left: 1px solid rgba(226, 232, 240, 0.8);
             z-index: 40;
@@ -114,13 +114,13 @@
             transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        #alphaai-inline-panel.alphaai-open {
+        #AlphaAI-inline-panel.AlphaAI-open {
             width: 420px !important;
             max-width: 420px !important;
         }
 
         @media (max-width: 1280px) {
-            #alphaai-inline-panel {
+            #AlphaAI-inline-panel {
                 position: relative;
                 right: auto;
                 top: auto;
@@ -129,17 +129,17 @@
                 border-left: 1px solid rgba(226, 232, 240, 0.8);
             }
 
-            #alphaai-inline-panel:not(.w-0) {
+            #AlphaAI-inline-panel:not(.w-0) {
                 width: 100% !important;
                 max-width: 420px !important;
             }
 
-            #alphaai-backdrop {
+            #AlphaAI-backdrop {
                 display: none;
             }
         }
 
-        #alphaai-backdrop {
+        #AlphaAI-backdrop {
             position: fixed;
             inset: 0;
             background: rgba(15, 23, 42, 0.3);
@@ -151,20 +151,20 @@
             transition: opacity 0.3s ease;
         }
 
-        #alphaai-backdrop.active {
+        #AlphaAI-backdrop.active {
             display: none !important;
             opacity: 0;
             pointer-events: none;
         }
 
-        .alphaai-pro-glass {
+        .AlphaAI-pro-glass {
             background: linear-gradient(135deg, #f1f5f9, #f8fafc);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-left: 1px solid rgba(226, 232, 240, 0.8);
         }
 
-        .alphaai-glass-card {
+        .AlphaAI-glass-card {
             background: rgba(255, 255, 255, 0.7);
             border: 1px solid rgba(226, 232, 240, 0.6);
             border-radius: 20px;
@@ -172,14 +172,14 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
         }
 
-        .alphaai-glass-card:hover {
+        .AlphaAI-glass-card:hover {
             background: #ffffff;
             border-color: #e2e8f0;
             transform: translateY(-2px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.04), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
         }
 
-        .alphaai-input-container {
+        .AlphaAI-input-container {
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             border: 1px solid rgba(168, 85, 247, 0.3);
             background: #ffffff !important;
@@ -189,14 +189,14 @@
             position: relative;
         }
 
-        .alphaai-input-container:hover {
+        .AlphaAI-input-container:hover {
             border-color: rgba(168, 85, 247, 0.6);
             box-shadow: 0 0 65px 0px rgba(168, 85, 247, 0.5),
                 0 10px 25px -5px rgba(0, 0, 0, 0.06);
             transform: translateY(-1px);
         }
 
-        .alphaai-input-container:focus-within {
+        .AlphaAI-input-container:focus-within {
             border-color: rgba(168, 85, 247, 0.6);
             box-shadow: 0 0 65px -2px rgba(168, 85, 247, 0.4),
                 0 15px 35px -8px rgba(168, 85, 247, 0.1);
@@ -2186,6 +2186,54 @@
 
                 </button>
 
+
+                <button onclick="navigate('manage-apps')" id="nav-manage-apps" data-role="admin"
+                    data-tooltip="Applications"
+                    class="nav-item w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-all group font-medium text-[11px] border border-transparent mb-0.5 sidebar-nav-item">
+
+                    <span
+                        class="w-6 h-6 rounded bg-white border border-gray-200 group-hover:border-indigo-200 flex items-center justify-center transition-colors shadow-sm flex-shrink-0 sidebar-nav-icon"><i
+                            class="fas fa-cubes text-blue-500"></i></span>
+
+                    <span class="font-bold sidebar-nav-text">Applications</span>
+
+                </button>
+
+                <button onclick="navigate('storage')" id="nav-storage" data-role="admin" data-tooltip="Disk & Storage"
+                    class="nav-item w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-all group font-medium text-[11px] border border-transparent mb-0.5 sidebar-nav-item">
+
+                    <span
+                        class="w-6 h-6 rounded bg-white border border-gray-200 group-hover:border-indigo-200 flex items-center justify-center transition-colors shadow-sm flex-shrink-0 sidebar-nav-icon"><i
+                            class="fas fa-hdd text-slate-600"></i></span>
+
+                    <span class="font-bold sidebar-nav-text">Disk & Storage</span>
+
+                </button>
+
+                <button onclick="navigate('users-groups')" id="nav-users-groups" data-role="admin"
+                    data-tooltip="Users & Groups"
+                    class="nav-item w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-all group font-medium text-[11px] border border-transparent mb-0.5 sidebar-nav-item">
+
+                    <span
+                        class="w-6 h-6 rounded bg-white border border-gray-200 group-hover:border-indigo-200 flex items-center justify-center transition-colors shadow-sm flex-shrink-0 sidebar-nav-icon"><i
+                            class="fas fa-users-cog text-emerald-500"></i></span>
+
+                    <span class="font-bold sidebar-nav-text">Users & Groups</span>
+
+                </button>
+
+                <button onclick="navigate('global-apps')" id="nav-global-apps" data-role="admin"
+                    data-tooltip="App Store"
+                    class="nav-item w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-all group font-medium text-[11px] border border-transparent mb-0.5 sidebar-nav-item">
+
+                    <span
+                        class="w-6 h-6 rounded bg-white border border-gray-200 group-hover:border-indigo-200 flex items-center justify-center transition-colors shadow-sm flex-shrink-0 sidebar-nav-icon"><i
+                            class="fas fa-store text-purple-500"></i></span>
+
+                    <span class="font-bold sidebar-nav-text">App Store</span>
+
+                </button>
+
                 <button onclick="navigate('files')" id="nav-files" data-tooltip="File Manager"
                     class="nav-item w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-all group font-medium text-[11px] border border-transparent mb-0.5 sidebar-nav-item">
 
@@ -2194,6 +2242,28 @@
                             class="fas fa-code text-indigo-500"></i></span>
 
                     <span class="font-bold sidebar-nav-text">FileManager</span>
+
+                </button>
+
+                <button onclick="navigate('security')" id="nav-security" data-role="admin" data-tooltip="Security"
+                    class="nav-item w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-all group font-medium text-[11px] border border-transparent mb-0.5 sidebar-nav-item">
+
+                    <span
+                        class="w-6 h-6 rounded bg-white border border-gray-200 group-hover:border-indigo-200 flex items-center justify-center transition-colors shadow-sm flex-shrink-0 sidebar-nav-icon"><i
+                            class="fas fa-shield-alt text-orange-500"></i></span>
+
+                    <span class="font-bold sidebar-nav-text">Security</span>
+
+                </button>
+
+                <button onclick="navigate('tasks')" id="nav-tasks" data-tooltip="Tasks"
+                    class="nav-item w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-all group font-medium text-[11px] border border-transparent mb-0.5 sidebar-nav-item">
+
+                    <span
+                        class="w-6 h-6 rounded bg-white border border-gray-200 group-hover:border-indigo-200 flex items-center justify-center transition-colors shadow-sm flex-shrink-0 sidebar-nav-icon"><i
+                            class="fas fa-calendar-check text-teal-500"></i></span>
+
+                    <span class="font-bold sidebar-nav-text">Tasks</span>
 
                 </button>
 
@@ -13964,7 +14034,7 @@
 
                             // Force clear any potential local data Supabase missed
 
-                            localStorage.removeItem('sb-psnrofnlgpqkfprjrbnm-auth-token');
+                            localStorage.removeItem('sb-bcuxmvaicdnkbxcvqbds-auth-token');
 
 
 

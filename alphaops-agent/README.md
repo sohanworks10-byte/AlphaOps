@@ -77,7 +77,7 @@ screen -list | grep alphaops-agent
 ## Environment Variables
 
 - `ALPHAOPS_AGENT_TOKEN` - Authentication token (required)
-- `ALPHAOPS_BACKEND_URL` - Backend WebSocket URL (default: wss://alphaops-production.up.railway.app)
+- `AlphaOps_BACKEND_URL` - Backend WebSocket URL (default: wss://alphaops-production.up.railway.app)
 
 ## Command Line Arguments
 

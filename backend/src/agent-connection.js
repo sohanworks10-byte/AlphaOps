@@ -91,24 +91,12 @@ class AgentConnection {
       : randomId() + randomId();
 
     const code = crypto.randomBytes(3).toString('hex');
-
-    // Get binary URLs from environment or fallback
-    const binaryUrlAmd64 = process.env.AlphaOps_AGENT_BINARY_URL_LINUX_AMD64 || '';
-    const binaryUrlArm64 = process.env.AlphaOps_AGENT_BINARY_URL_LINUX_ARM64 || '';
-
-    this.enrollCodes.set(code, { 
-      token, 
-      userId, 
-      agentId, 
-      expiresAt,
-      binaryUrlAmd64,
-      binaryUrlArm64
-    });
+    this.enrollCodes.set(code, { token, userId, agentId, expiresAt });
 
     if (!secret) {
       this.pendingTokens.set(token, { userId, agentId, expiresAt });
     }
-    return { agentId, token, code, expiresAt, binaryUrlAmd64, binaryUrlArm64 };
+    return { agentId, token, code, expiresAt };
   }
 
   consumeEnrollCode(code) {
@@ -293,16 +281,6 @@ class AgentConnection {
     } catch (err) {
       return;
     }
-  }
-
-  async connect(userId, agentId) {
-    const session = this.sessions.get(agentId);
-    if (!session) throw new Error('Agent offline');
-    if (session.userId !== userId) throw new Error('Unauthorized');
-
-    const serverId = `${userId}_agent_${agentId}`;
-    this.serverBindings.set(serverId, agentId);
-    return { success: true, serverId };
   }
 }
 
