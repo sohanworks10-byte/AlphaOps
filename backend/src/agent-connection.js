@@ -91,12 +91,24 @@ class AgentConnection {
       : randomId() + randomId();
 
     const code = crypto.randomBytes(3).toString('hex');
-    this.enrollCodes.set(code, { token, userId, agentId, expiresAt });
+
+    // Get binary URLs from environment or fallback
+    const binaryUrlAmd64 = process.env.AlphaOps_AGENT_BINARY_URL_LINUX_AMD64 || '';
+    const binaryUrlArm64 = process.env.AlphaOps_AGENT_BINARY_URL_LINUX_ARM64 || '';
+
+    this.enrollCodes.set(code, { 
+      token, 
+      userId, 
+      agentId, 
+      expiresAt,
+      binaryUrlAmd64,
+      binaryUrlArm64
+    });
 
     if (!secret) {
       this.pendingTokens.set(token, { userId, agentId, expiresAt });
     }
-    return { agentId, token, code, expiresAt };
+    return { agentId, token, code, expiresAt, binaryUrlAmd64, binaryUrlArm64 };
   }
 
   consumeEnrollCode(code) {
