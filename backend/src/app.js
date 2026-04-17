@@ -85,7 +85,7 @@ export function createApp() {
       const backendUrl = process.env.AlphaOps_BACKEND_URL || 'https://alphaops-production.up.railway.app';
       const wsUrl = backendUrl.replace(/^http/, 'ws');
 
-      const installCommand = `curl -fsSL https://raw.githubusercontent.com/sohanworks10-byte/AlphaOps/main/alphaops-agent/install.sh | bash -s -- --token ${result.token} --backend ${wsUrl} --install`;
+      const installCommand = `curl -fsSL https://raw.githubusercontent.com/sohanworks10-byte/AlphaOps/main/alphaops-agent/install.sh | bash -s -- --token ${result.token} --backend ${wsUrl}`;
 
       return res.json({
         success: true,
