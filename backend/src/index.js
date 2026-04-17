@@ -89,6 +89,11 @@ app.use(
 
 app.use(express.json({ limit: '10mb' }));
 
+// Root health check for Railway
+app.get('/', (req, res) => {
+  res.json({ ok: true, service: 'AlphaOps Backend' });
+});
+
 // Core API
 app.use(createApp());
 
