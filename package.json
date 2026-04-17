@@ -1,0 +1,9 @@
+{
+  "name": "alphaops-monorepo",
+  "private": true,
+  "description": "AlphaOps Monorepo",
+  "scripts": {
+    "start": "npm start --prefix backend",
+    "build": "npm install --prefix backend"
+  }
+}
