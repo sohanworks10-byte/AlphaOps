@@ -2,7 +2,15 @@
 
 ## Critical Fixes Applied
 
-### 1. Server Binding Issue ✅
+### 1. Missing Controller Files ✅
+**Fixed:** Created stub controllers for phase2 and phase3 routes
+- `integrations.controller.js`
+- `artifacts.controller.js`
+- `repo-mappings.controller.js`
+- `gitwebhook.controller.js`
+- `previews.controller.js`
+
+### 2. Server Binding Issue ✅
 **Fixed:** Server now binds to `0.0.0.0` instead of localhost only
 ```javascript
 server.listen(port, '0.0.0.0', () => {
@@ -10,7 +18,7 @@ server.listen(port, '0.0.0.0', () => {
 });
 ```
 
-### 2. Missing Root Route ✅
+### 3. Missing Root Route ✅
 **Fixed:** Added handler for `/` (Railway's healthcheck endpoint)
 ```javascript
 app.get('/', (req, res) => {
@@ -18,7 +26,7 @@ app.get('/', (req, res) => {
 });
 ```
 
-### 3. CORS Configuration ✅
+### 4. CORS Configuration ✅
 **Fixed:** Added all necessary HTTP methods including PUT
 ```javascript
 methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
@@ -28,7 +36,7 @@ methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
 
 ```bash
 git add .
-git commit -m "Fix Railway deployment: bind to 0.0.0.0, add root route, update CORS"
+git commit -m "Fix Railway deployment: add missing controllers, bind to 0.0.0.0, add root route"
 git push origin main
 ```
 
@@ -46,9 +54,10 @@ All should return JSON responses with `"ok": true`.
 
 ## What Was Wrong
 
-Railway's healthcheck was failing because:
-- Server wasn't accessible from outside (not binding to 0.0.0.0)
-- No route handler for `/` (healthcheck path)
-- CORS wasn't allowing PUT requests
+Railway deployment was failing because:
+1. **Missing controller files** - phase2/phase3 routes imported non-existent controllers
+2. Server wasn't accessible from outside (not binding to 0.0.0.0)
+3. No route handler for `/` (healthcheck path)
+4. CORS wasn't allowing PUT requests
 
 All fixed now! 🚀
