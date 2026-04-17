@@ -246,35 +246,6 @@ app.post('/ssh/connect', requireUser, async (req, res) => {
   }
 });
 
-app.post('/agent/enroll', requireUser, async (req, res) => {
-  try {
-    const result = agentConnection.createEnrollToken(req.user.id);
-    const backendUrl = process.env.AlphaOps_BACKEND_URL || 'https://alphaops-production.up.railway.app';
-    const wsUrl = backendUrl.replace(/^http/, 'ws');
-
-    const installCommand = `curl -fsSL https://raw.githubusercontent.com/sohanworks10-byte/AlphaOps/main/alphaops-agent/install.sh | bash -s -- --token ${result.token} --backend ${wsUrl} --install`;
-
-    return res.json({
-      success: true,
-      agentId: result.agentId,
-      token: result.token,
-      installCommand,
-    });
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
-});
-
-app.post('/agent/connect', requireUser, async (req, res) => {
-  try {
-    const { agentId, serverId } = req.body;
-    const result = await agentConnection.connect(req.user.id, agentId || serverId);
-    return res.json(result);
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
-});
-
 app.post('/ssh/disconnect', requireUser, async (req, res) => {
   try {
     const { serverId } = req.body;
