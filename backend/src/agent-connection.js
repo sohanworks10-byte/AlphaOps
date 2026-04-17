@@ -294,6 +294,16 @@ class AgentConnection {
       return;
     }
   }
+
+  async connect(userId, agentId) {
+    const session = this.sessions.get(agentId);
+    if (!session) throw new Error('Agent offline');
+    if (session.userId !== userId) throw new Error('Unauthorized');
+
+    const serverId = `${userId}_agent_${agentId}`;
+    this.serverBindings.set(serverId, agentId);
+    return { success: true, serverId };
+  }
 }
 
 export const agentConnection = new AgentConnection();
