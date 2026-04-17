@@ -271,7 +271,7 @@ app.post('/ai/chat', requireUser, async (req, res) => {
           providerMessage = lastErrText;
         }
         providerMessage = String(providerMessage || '').trim();
-        if (providerMessage.length > 300) providerMessage = providerMessage.slice(0, 300) + '…';
+        if (providerMessage.length > 300) providerMessage = providerMessage.slice(0, 300) + 'GǪ';
 
         const isRateLimited = lastStatus === 429 || /\b429\b/.test(lastErrText);
         if (isRateLimited) {
@@ -297,7 +297,7 @@ app.post('/ai/chat', requireUser, async (req, res) => {
         '';
       if (raw) {
         shortRateLimitMsg = String(raw).trim();
-        if (shortRateLimitMsg.length > 300) shortRateLimitMsg = shortRateLimitMsg.slice(0, 300) + '…';
+        if (shortRateLimitMsg.length > 300) shortRateLimitMsg = shortRateLimitMsg.slice(0, 300) + 'GǪ';
       }
     } catch (e) {
     }
@@ -1638,8 +1638,8 @@ app.get('/agent/install.sh', async (req, res) => {
   const defaultCode = String(req.query.code || '').trim();
 
   // Use environment variables directly - no Supabase dependency to avoid timeouts
-  const binAmd64 = String(process.env.AlphaOps_AGENT_BINARY_URL_LINUX_AMD64 || '').trim();
-  const binArm64 = String(process.env.AlphaOps_AGENT_BINARY_URL_LINUX_ARM64 || '').trim();
+  const binAmd64 = '';
+  const binArm64 = '';
 
   res.send(`#!/usr/bin/env bash
 set -e
@@ -1856,7 +1856,7 @@ wait_for_apt_lock() {
   local waited=0
   while fuser /var/lib/dpkg/lock /var/lib/apt/lists/lock /var/lib/dpkg/lock-frontend /var/cache/apt/archives/lock >/dev/null 2>&1; do
     if [ "$waited" -ge "$max_wait" ]; then
-      ui_line "apt lock held too long — force-clearing..."
+      ui_line "apt lock held too long G�� force-clearing..."
       pkill -9 apt 2>/dev/null || true
       pkill -9 apt-get 2>/dev/null || true
       pkill -9 dpkg 2>/dev/null || true
