@@ -4,5 +4,6 @@ buildCommand = "npm install --prefix backend"
 
 [deploy]
 startCommand = "npm start --prefix backend"
-healthcheckPath = "/"
+healthcheckPath = "/health"
+healthcheckTimeout = 100
 restartPolicy = "on-failure"

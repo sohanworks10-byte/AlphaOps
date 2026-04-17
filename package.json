@@ -2,6 +2,9 @@
   "name": "alphaops-monorepo",
   "private": true,
   "description": "AlphaOps Monorepo",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "start": "npm start --prefix backend",
     "build": "npm install --prefix backend"
