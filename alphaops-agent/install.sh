@@ -59,6 +59,13 @@ echo "✓ Detected architecture: $ARCH"
 mkdir -p "$INSTALL_DIR"
 cd "$INSTALL_DIR"
 
+# Stop existing agent if running to avoid "Text file busy"
+if screen -list | grep -q "alphaops-agent"; then
+    echo "✓ Stopping existing agent session..."
+    screen -X -S alphaops-agent quit || true
+    sleep 2
+fi
+
 # Get download URL for the binary
 # If version is latest, we'll get it from the latest release
 if [ "$VERSION" = "latest" ]; then
