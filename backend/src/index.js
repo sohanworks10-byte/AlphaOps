@@ -2008,10 +2008,10 @@ ensure_downloader() {
   return 1
 }
 
-run_step "Ensuring download tool" ensure_downloader
+STEP_DONE=$((STEP_DONE + 1)); ui_line "[$STEP_DONE/$STEP_TOTAL] Ensuring download tool"; ensure_downloader && ui_line "[OK] Ensuring download tool" || { ui_line "[FAIL] Ensuring download tool"; exit 1; }
 
 if ! command -v node >/dev/null 2>&1 || ! command -v npm >/dev/null 2>&1; then
-  run_step "Installing Node.js + npm" install_pkgs nodejs npm
+  STEP_DONE=$((STEP_DONE + 1)); ui_line "[$STEP_DONE/$STEP_TOTAL] Installing Node.js + npm"; install_pkgs nodejs npm && ui_line "[OK] Installing Node.js + npm" || { ui_line "[FAIL] Installing Node.js + npm"; exit 1; }
 fi
 
 INSTALL_DIR="/opt/AlphaOps-agent"
