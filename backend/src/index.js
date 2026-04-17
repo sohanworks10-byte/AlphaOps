@@ -1,4 +1,4 @@
-import 'dotenv/config';
+﻿import 'dotenv/config';
 
 import cors from 'cors';
 import express from 'express';
@@ -271,7 +271,7 @@ app.post('/ai/chat', requireUser, async (req, res) => {
           providerMessage = lastErrText;
         }
         providerMessage = String(providerMessage || '').trim();
-        if (providerMessage.length > 300) providerMessage = providerMessage.slice(0, 300) + 'GǪ';
+        if (providerMessage.length > 300) providerMessage = providerMessage.slice(0, 300) + 'ΓÇª';
 
         const isRateLimited = lastStatus === 429 || /\b429\b/.test(lastErrText);
         if (isRateLimited) {
@@ -297,7 +297,7 @@ app.post('/ai/chat', requireUser, async (req, res) => {
         '';
       if (raw) {
         shortRateLimitMsg = String(raw).trim();
-        if (shortRateLimitMsg.length > 300) shortRateLimitMsg = shortRateLimitMsg.slice(0, 300) + 'GǪ';
+        if (shortRateLimitMsg.length > 300) shortRateLimitMsg = shortRateLimitMsg.slice(0, 300) + 'ΓÇª';
       }
     } catch (e) {
     }
@@ -1856,7 +1856,7 @@ wait_for_apt_lock() {
   local waited=0
   while fuser /var/lib/dpkg/lock /var/lib/apt/lists/lock /var/lib/dpkg/lock-frontend /var/cache/apt/archives/lock >/dev/null 2>&1; do
     if [ "$waited" -ge "$max_wait" ]; then
-      ui_line "apt lock held too long G�� force-clearing..."
+      ui_line "apt lock held too long ΓÇö force-clearing..."
       pkill -9 apt 2>/dev/null || true
       pkill -9 apt-get 2>/dev/null || true
       pkill -9 dpkg 2>/dev/null || true
