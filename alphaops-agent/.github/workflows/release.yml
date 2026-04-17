@@ -53,6 +53,11 @@ jobs:
           files: |
             devyntra-agent-linux-amd64
             devyntra-agent-linux-arm64
+          body: |
+            ## AlphaOps Agent v1.0.0
+            Download the agent for your architecture:
+            - **AMD64 (x64)**: [devyntra-agent-linux-amd64](https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/devyntra-agent-linux-amd64)
+            - **ARM64**: [devyntra-agent-linux-arm64](https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/devyntra-agent-linux-arm64)
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
