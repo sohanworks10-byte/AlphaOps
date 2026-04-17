@@ -1638,8 +1638,8 @@ app.get('/agent/install.sh', async (req, res) => {
   const defaultCode = String(req.query.code || '').trim();
 
   // Use environment variables directly - no Supabase dependency to avoid timeouts
-  const binAmd64 = '';
-  const binArm64 = '';
+  const binAmd64 = String(process.env.AlphaOps_AGENT_BINARY_URL_LINUX_AMD64 || '').trim();
+  const binArm64 = String(process.env.AlphaOps_AGENT_BINARY_URL_LINUX_ARM64 || '').trim();
 
   res.send(`#!/usr/bin/env bash
 set -e
@@ -1959,6 +1959,16 @@ if [ -n "$BIN_URL" ]; then
 AlphaOps_AGENT_TOKEN=$TOKEN
 AlphaOps_BACKEND_URL=$BACKEND_URL
 EOF
+
+run_step "Creating start script" bash -c "cat > \"$INSTALL_DIR/start.sh\" <<'WRAPPER'
+#!/bin/bash
+set -e
+cd $INSTALL_DIR
+source $INSTALL_DIR/config.env
+exec node $INSTALL_DIR/agent.js --token \"\$AlphaOps_AGENT_TOKEN\" --backend \"\$AlphaOps_BACKEND_URL\"
+WRAPPER
+chmod +x \"$INSTALL_DIR/start.sh\"
+"
 "
 
   if command -v systemctl >/dev/null 2>&1; then
@@ -2008,10 +2018,10 @@ ensure_downloader() {
   return 1
 }
 
-STEP_DONE=$((STEP_DONE + 1)); ui_line "[$STEP_DONE/$STEP_TOTAL] Ensuring download tool"; ensure_downloader && ui_line "[OK] Ensuring download tool" || { ui_line "[FAIL] Ensuring download tool"; exit 1; }
+run_step "Ensuring download tool" ensure_downloader
 
 if ! command -v node >/dev/null 2>&1 || ! command -v npm >/dev/null 2>&1; then
-  STEP_DONE=$((STEP_DONE + 1)); ui_line "[$STEP_DONE/$STEP_TOTAL] Installing Node.js + npm"; install_pkgs nodejs npm && ui_line "[OK] Installing Node.js + npm" || { ui_line "[FAIL] Installing Node.js + npm"; exit 1; }
+  run_step "Installing Node.js + npm" install_pkgs nodejs npm
 fi
 
 INSTALL_DIR="/opt/AlphaOps-agent"
@@ -2041,6 +2051,16 @@ AlphaOps_AGENT_TOKEN=$TOKEN
 AlphaOps_BACKEND_URL=$BACKEND_URL
 EOF' _ "$INSTALL_DIR"
 
+run_step "Creating start script" bash -c "cat > \"$INSTALL_DIR/start.sh\" <<'WRAPPER'
+#!/bin/bash
+set -e
+cd $INSTALL_DIR
+source $INSTALL_DIR/config.env
+exec node $INSTALL_DIR/agent.js --token \"\$AlphaOps_AGENT_TOKEN\" --backend \"\$AlphaOps_BACKEND_URL\"
+WRAPPER
+chmod +x \"$INSTALL_DIR/start.sh\"
+"
+
 if command -v systemctl >/dev/null 2>&1; then
 run_step "Installing systemd service" bash -c "cat > /etc/systemd/system/AlphaOps-agent.service <<EOF
 [Unit]
@@ -2051,7 +2071,7 @@ After=network.target
 Type=simple
 WorkingDirectory=$INSTALL_DIR
 EnvironmentFile=$INSTALL_DIR/config.env
-ExecStart=/usr/bin/env node $INSTALL_DIR/agent.js --token \\\$AlphaOps_AGENT_TOKEN --backend \\\$AlphaOps_BACKEND_URL
+ExecStart=$INSTALL_DIR/start.sh
 Restart=always
 RestartSec=5
 StandardOutput=append:/var/log/AlphaOps-agent/agent.log
