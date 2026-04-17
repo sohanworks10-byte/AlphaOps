@@ -9,6 +9,7 @@ import { agentConnection } from './agent-connection.js';
 import { sshConnection } from './ssh-connection.js';
 import { createApp } from './app.js';
 import { query } from './infra/db.js';
+import { attachAgentWs } from './ws/agent-ws.js';
 
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
@@ -313,6 +314,9 @@ app.post('/ssh/stats', requireUser, async (req, res) => {
 
 const port = process.env.PORT ? Number(process.env.PORT) : 8080;
 const server = http.createServer(app);
+
+// Attach agent WebSocket server
+attachAgentWs({ server });
 
 server.listen(port, () => {
   console.log(`AlphaOps backend listening on ${port}`);
