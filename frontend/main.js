@@ -181,8 +181,7 @@ function getDesktopBackendBaseUrl() {
 
 
     // Fallbacks (remove or override via AlphaOps_BACKEND_URL env)
-
-    return 'https://AlphaOps-global-20260203.onrender.com';
+    return 'https://alphaops-production.up.railway.app';
 }
 
 
@@ -234,12 +233,12 @@ const sshClient = {
             if (!agentId) {
                 throw new Error('Invalid agent id');
             }
-            apiClient.setBaseUrl('https://AlphaOps-backend-api-production.up.railway.app');
+            apiClient.setBaseUrl('https://alphaops-production.up.railway.app');
             apiClient.setToken(currentAccessToken);
             const result = await apiClient.connectAgent(agentId);
             this.isConnected = true;
             this.connectionType = 'agent';
-            this.baseUrl = 'https://AlphaOps-backend-api-production.up.railway.app';
+            this.baseUrl = 'https://alphaops-production.up.railway.app';
             return result;
         }
 

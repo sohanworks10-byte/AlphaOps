@@ -10,7 +10,7 @@ function getDefaultBaseUrl() {
     }
   }
 
-  return 'https://alphaops-backend-api-production.up.railway.app';
+  return 'https://alphaops-production.up.railway.app';
 }
 
 function normalizeBaseUrl(baseUrl) {

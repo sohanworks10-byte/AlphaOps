@@ -3,7 +3,7 @@ const { spawn, execSync } = require('child_process');
 const os = require('os');
 
 const TOKEN = process.env.ALPHAOPS_AGENT_TOKEN || process.argv.find((a, i, arr) => arr[i - 1] === '--token' && a);
-const BACKEND_URL = process.env.ALPHAOPS_BACKEND_URL || process.argv.find((a, i, arr) => arr[i - 1] === '--backend' && a) || 'wss://alphaops-backend-api-production.up.railway.app';
+const BACKEND_URL = process.env.ALPHAOPS_BACKEND_URL || process.argv.find((a, i, arr) => arr[i - 1] === '--backend' && a) || 'wss://alphaops-production.up.railway.app';
 const INSTALL_MODE = process.argv.includes('--install');
 
 if (!TOKEN) {
