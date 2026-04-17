@@ -22,15 +22,15 @@ Run the install command generated from your AlphaOps desktop app. The agent will
 
 ```bash
 # Example (use the actual command from your AlphaOps app)
-curl -fsSL https://raw.githubusercontent.com/sohan20051519/alphaops-agent/main/install.sh | bash -s -- --token YOUR_TOKEN --backend wss://your-backend.com --install
+curl -fsSL https://raw.githubusercontent.com/sohanworks10-byte/AlphaOps/main/alphaops-agent/install.sh | bash -s -- --token YOUR_TOKEN --backend wss://your-backend.com --install
 ```
 
 ### Manual Installation
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/sohan20051519/alphaops-agent.git
-cd alphaops-agent
+git clone https://github.com/sohanworks10-byte/AlphaOps.git
+cd AlphaOps/alphaops-agent
 ```
 
 2. Install dependencies:
