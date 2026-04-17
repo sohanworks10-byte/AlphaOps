@@ -98,6 +98,18 @@ export function createApp() {
     }
   });
 
+  app.get('/agent/status', requireUser, async (req, res) => {
+    try {
+      const agentId = req.query.agentId;
+      if (!agentId) return res.status(400).json({ error: 'agentId is required' });
+
+      const online = agentConnection.isAgentOnline(agentId);
+      return res.json({ success: true, online });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  });
+
   app.post('/agent/connect', requireUser, async (req, res) => {
     try {
       const { agentId, serverId } = req.body;
