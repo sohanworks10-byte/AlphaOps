@@ -1477,6 +1477,30 @@ app.get('/agent/status', requireUser, async (req, res) => {
   }
 });
 
+app.get('/agent/list', requireUser, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const agents = [];
+    
+    // Get all sessions for this user
+    for (const [agentId, session] of agentConnection.sessions.entries()) {
+      if (session.userId === userId) {
+        agents.push({
+          agentId,
+          online: true,
+          connectedAt: session.connectedAt,
+          lastSeen: session.lastSeen,
+          meta: session.meta || {},
+        });
+      }
+    }
+    
+    return res.json({ success: true, agents });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+});
+
 app.post('/agent/uninstall', requireUser, async (req, res) => {
   try {
     const { agentId } = req.body || {};
