@@ -153,6 +153,10 @@ app.use(express.json({ limit: '10mb' }));
 // New modular API (pipelines/runs). Mounted after body parser so it doesn't break things
 app.use(createApp());
 
+app.get('/', (req, res) => {
+  res.json({ ok: true, service: 'AlphaOps Backend', version: '1.0.0' });
+});
+
 app.get('/health', (req, res) => {
   res.json({ ok: true });
 });
@@ -2120,7 +2124,7 @@ wss.on('connection', (ws, req) => {
   }
 });
 
-server.listen(port, () => {
+server.listen(port, '0.0.0.0', () => {
   console.log(`AlphaOps backend listening on ${port}`);
 });
 
